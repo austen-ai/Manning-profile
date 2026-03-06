@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manning Profile - Masonic Age Care Centre</title>
+    <style>
+        :root {
+            --color-bg-primary: #f5f5f5;
+            --color-surface: #ffffff;
+            --color-text-primary: #1a1a1a;
+            --color-text-secondary: #666;
+            --color-primary: #2563eb;
+            --color-primary-hover: #1d4ed8;
+            --color-border: #ddd;
+            --color-success: #10b981;
+            --color-warning: #f59e0b;
+            --color-danger: #ef4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--color-bg-primary);
+            color: var(--color-text-primary);
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: var(--color-surface);
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: var(--color-text-secondary);
+            font-size: 14px;
+        }
+
+        .tabs {
+            display: flex;
+            background: var(--color-surface);
+            border-bottom: 2px solid var(--color-border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .tab {
+            padding: 15px 25px;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+            transition: all 0.2s;
+        }
+
+        .tab.active {
+            color: var(--color-primary);
+            border-bottom: 2px solid var(--color-primary);
+            margin-bottom: -2px;
+        }
+
+        .tab:hover {
+            background: #f8f9fa;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 20px;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .controls {
+            background: var(--color-surface);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--color-primary-hover);
+        }
+
+        .btn-secondary {
+            background: #e5e7eb;
+            color: var(--color-text-primary);
+        }
+
+        .btn-secondary:hover {
+            background: #d1d5db;
+        }
+
+        .btn-small {
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+
+        .table-container {
+            background: var(--color-surface);
+            border-radius: 8px;
+            overflow-x: auto;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid var(--color-border);
+            white-space: nowrap;
+        }
+
+        th {
+            background: #f8f9fa;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .phase-header {
+            background: #e3f2fd !important;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .sub-phase-row {
+            background: white;
+        }
+
+        .sub-phase-row td:first-child {
+            padding-left: 30px;
+        }
+
+        input[type="number"] {
+            width: 50px;
+            padding: 4px;
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        input[type="text"] {
+            padding: 6px;
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+            font-size: 13px;
+            width: 100%;
+        }
+
+        .daily-total {
+            background: #fff3cd !important;
+            font-weight: 700;
+        }
+
+        .editable {
+            cursor: pointer;
+        }
+
+        .editable:hover {
+            background: #f0f9ff;
+        }
+
+        .chart-container {
+            background: var(--color-surface);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        canvas {
+            max-width: 100%;
+            height: 400px !important;
+        }
+
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            background: var(--color-surface);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .card h3 {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .card .value {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+        }
+
+        .pf-indicator {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .pf-good {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .pf-warning {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .pf-poor {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .progress-row {
+            background: #f0fdf4;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--color-surface);
+            padding: 30px;
+            border-radius: 8px;
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .modal-content h2 {
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .date-header {
+            font-size: 11px;
+            text-align: center;
+            padding: 5px !important;
+        }
+
+        .day-header {
+            text-align: center;
+            font-size: 10px;
+            background: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Manning Profile - Masonic Age Care Centre</h1>
+            <p>30 Housing Units | Resource Planning & Production Factor Tracking</p>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" onclick="switchTab('planning')">Resource Planning</button>
+            <button class="tab" onclick="switchTab('graph')">Manning Profile Graph</button>
+            <button class="tab" onclick="switchTab('progress')">Progress Tracking</button>
+            <button class="tab" onclick="switchTab('summary')">Summary & PF</button>
+        </div>
+
+        <div id="planning" class="tab-content active">
+            <div class="controls">
+                <button class="btn btn-primary" onclick="addPhase()">+ Add Phase</button>
+                <button class="btn btn-secondary" onclick="exportData()">Export Data</button>
+                <button class="btn btn-secondary" onclick="importData()">Import Data</button>
+                <label style="margin-left: auto;">
+                    Start Date: <input type="date" id="startDate" onchange="updateDateHeaders()">
+                </label>
+            </div>
+
+            <div class="table-container">
+                <table id="planningTable">
+                    <thead id="tableHeader"></thead>
+                    <tbody id="tableBody"></tbody>
+                    <tfoot>
+                        <tr class="daily-total">
+                            <td colspan="3"><strong>TOTAL RESOURCES REQUIRED</strong></td>
+                            <td id="totalDailyResources"></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+
+        <div id="graph" class="tab-content">
+            <div class="chart-container">
+                <h2 style="margin-bottom: 15px;">Manning Profile - Daily Resource Requirements</h2>
+                <canvas id="manningChart"></canvas>
+            </div>
+            <div class="summary-cards">
+                <div class="card">
+                    <h3>Average Resources/Day</h3>
+                    <div class="value" id="avgResources">0</div>
+                </div>
+                <div class="card">
+                    <h3>Peak Resources</h3>
+                    <div class="value" id="peakResources">0</div>
+                </div>
+                <div class="card">
+                    <h3>Total Man-Days</h3>
+                    <div class="value" id="totalManDays">0</div>
+                </div>
+                <div class="card">
+                    <h3>Project Duration</h3>
+                    <div class="value" id="projectDuration">0 days</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="progress" class="tab-content">
+            <div class="controls">
+                <button class="btn btn-primary" onclick="saveProgress()">Save Progress</button>
+            </div>
+            <div class="table-container">
+                <table id="progressTable">
+                    <thead>
+                        <tr>
+                            <th>Phase</th>
+                            <th>Sub-Phase</th>
+                            <th>Hours Allowed</th>
+                            <th>Hours Spent</th>
+                            <th>Production Factor</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="progressBody"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="summary" class="tab-content">
+            <div class="summary-cards">
+                <div class="card">
+                    <h3>Overall Production Factor</h3>
+                    <div class="value" id="overallPF">1.00</div>
+                </div>
+                <div class="card">
+                    <h3>Total Hours Allowed</h3>
+                    <div class="value" id="totalAllowed">0</div>
+                </div>
+                <div class="card">
+                    <h3>Total Hours Spent</h3>
+                    <div class="value" id="totalSpent">0</div>
+                </div>
+                <div class="card">
+                    <h3>Efficiency</h3>
+                    <div class="value" id="efficiency">100%</div>
+                </div>
+            </div>
+            <div class="chart-container">
+                <h2 style="margin-bottom: 15px;">Production Factor by Phase</h2>
+                <canvas id="pfChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div id="addPhaseModal" class="modal">
+        <div class="modal-content">
+            <h2>Add Construction Phase</h2>
+            <div class="form-group">
+                <label>Phase Name:</label>
+                <input type="text" id="newPhaseName" placeholder="e.g., Foundations">
+            </div>
+            <div class="form-group">
+                <label>Sub-Phases (one per line):</label>
+                <textarea id="newSubPhases" rows="5" style="width: 100%; padding: 8px; border: 1px solid var(--color-border); border-radius: 4px;" placeholder="e.g.,&#10;Site Preparation&#10;Excavation&#10;Footings&#10;Concrete Pour"></textarea>
+            </div>
+            <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px;">
+                <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="savePhase()">Add Phase</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const projectData = {
+            startDate: new Date(),
+            numDays: 180,
+            phases: [
+                {
+                    name: 'Foundations',
+                    subPhases: [
+                        { name: 'Site Preparation & Survey', resources: Array(180).fill(0), hoursAllowed: 320, hoursSpent: 0 },
+                        { name: 'Excavation', resources: Array(180).fill(0), hoursAllowed: 480, hoursSpent: 0 },
+                        { name: 'Formwork & Reinforcing', resources: Array(180).fill(0), hoursAllowed: 640, hoursSpent: 0 },
+                        { name: 'Concrete Pour & Finish', resources: Array(180).fill(0), hoursAllowed: 400, hoursSpent: 0 }
+                    ]
+                },
+                {
+                    name: 'Framing',
+                    subPhases: [
+                        { name: 'Floor Framing', resources: Array(180).fill(0), hoursAllowed: 960, hoursSpent: 0 },
+                        { name: 'Wall Framing', resources: Array(180).fill(0), hoursAllowed: 1280, hoursSpent: 0 },
+                        { name: 'Ceiling Framing', resources: Array(180).fill(0), hoursAllowed: 640, hoursSpent: 0 }
+                    ]
+                },
+                {
+                    name: 'Roof Structure',
+                    subPhases: [
+                        { name: 'Roof Trusses Install', resources: Array(180).fill(0), hoursAllowed: 480, hoursSpent: 0 },
+                        { name: 'Roof Bracing', resources: Array(180).fill(0), hoursAllowed: 320, hoursSpent: 0 },
+                        { name: 'Roof Cladding', resources: Array(180).fill(0), hoursAllowed: 800, hoursSpent: 0 },
+                        { name: 'Guttering & Flashings', resources: Array(180).fill(0), hoursAllowed: 400, hoursSpent: 0 }
+                    ]
+                },
+                {
+                    name: 'External Cladding',
+                    subPhases: [
+                        { name: 'Building Wrap', resources: Array(180).fill(0), hoursAllowed: 240, hoursSpent: 0 },
+                        { name: 'Cladding Installation', resources: Array(180).fill(0), hoursAllowed: 1280, hoursSpent: 0 },
+                        { name: 'Windows & Doors', resources: Array(180).fill(0), hoursAllowed: 640, hoursSpent: 0 },
+                        { name: 'External Joinery', resources: Array(180).fill(0), hoursAllowed: 480, hoursSpent: 0 }
+                    ]
+                },
+                {
+                    name: 'Services - Rough-In',
+                    subPhases: [
+                        { name: 'Electrical Rough-In', resources: Array(180).fill(0), hoursAllowed: 800, hoursSpent: 0 },
+                        { name: 'Plumbing Rough-In', resources: Array(180).fill(0), hoursAllowed: 960, hoursSpent: 0 },
+                        { name: 'HVAC Rough-In', resources: Array(180).fill(0), hoursAllowed: 640, hoursSpent: 0 },
+                        { name: 'Fire System Install', resources: Array(180).fill(0), hoursAllowed: 480, hoursSpent: 0 }
+                    ]
+                },
+                {
+                    name: 'Insulation',
+                    subPhases: [
+                        { name: 'Ceiling Insulation', resources: Array(180).fill(0), hoursAllowed: 320, hoursSpent: 0 },
+                        { name: 'Wall Insulation', resources: Array(180).fill(0), hoursAllowed: 480, hoursSpent: 0 },
+                        { name: 'Floor Insulation', resources: Array(180).fill(0), hoursAllowed: 240, hoursSpent: 0 }
+                    ]
+                },
+                {
+                    name: 'Internal Linings',
+                    subPhases: [
+                        { name: 'Plasterboard Install', resources: Array(180).fill(0), hoursAllowed: 1280, hoursSpent: 0 },
+                        { name: 'Stopping & Sanding', resources: Array(180).fill(0), hoursAllowed: 960, hoursSpent: 0 },
+                        { name: 'Painting - First Coat', resources: Array(180).fill(0), hoursAllowed: 640, hoursSpent: 0 }
+                    ]
+                },
+                {
+                    name: 'Final Fit-Off',
+                    subPhases: [
+                        { name: 'Kitchen Installation', resources: Array(180).fill(0), hoursAllowed: 640, hoursSpent: 0 },
+                        { name: 'Bathroom Fit-Off', resources: Array(180).fill(0), hoursAllowed: 800, hoursSpent: 0 },
+                        { name: 'Internal Doors & Hardware', resources: Array(180).fill(0), hoursAllowed: 480, hoursSpent: 0 },
+                        { name: 'Flooring', resources: Array(180).fill(0), hoursAllowed: 960, hoursSpent: 0 },
+                        { name: 'Electrical Fit-Off', resources: Array(180).fill(0), hoursAllowed: 480, hoursSpent: 0 },
+                        { name: 'Final Painting', resources: Array(180).fill(0), hoursAllowed: 640, hoursSpent: 0 },
+                        { name: 'Clean & Handover', resources: Array(180).fill(0), hoursAllowed: 320, hoursSpent: 0 }
+                    ]
+                }
+            ]
+        };
+
+        let manningChart = null;
+        let pfChart = null;
+
+        function initApp() {
+            document.getElementById('startDate').valueAsDate = projectData.startDate;
+            renderTable();
+            renderProgressTable();
+            updateGraph();
+            updateSummary();
+        }
+
+        function renderTable() {
+            const header = document.getElementById('tableHeader');
+            const body = document.getElementById('tableBody');
+            
+            let headerHTML = '<tr><th>Phase</th><th>Sub-Phase</th><th>Hours Allowed</th>';
+            
+            for (let i = 0; i < Math.min(projectData.numDays, 180); i++) {
+                const date = new Date(projectData.startDate);
+                date.setDate(date.getDate() + i);
+                const dayName = ['S','M','T','W','T','F','S'][date.getDay()];
+                const dayNum = date.getDate();
+                headerHTML += `<th class="date-header"><div>${dayName}</div><div>${dayNum}</div></th>`;
+            }
+            headerHTML += '</tr>';
+            header.innerHTML = headerHTML;
+
+            let bodyHTML = '';
+            projectData.phases.forEach((phase, phaseIdx) => {
+                bodyHTML += `<tr class="phase-header">
+                    <td colspan="${3 + Math.min(projectData.numDays, 180)}">
+                        <strong>${phase.name}</strong>
+                        <button class="btn btn-small btn-secondary" onclick="addSubPhase(${phaseIdx})" style="margin-left: 10px;">+ Sub-Phase</button>
+                        <button class="btn btn-small btn-secondary" onclick="deletePhase(${phaseIdx})" style="margin-left: 5px;">Delete Phase</button>
+                    </td>
+                </tr>`;
+                
+                phase.subPhases.forEach((subPhase, subIdx) => {
+                    bodyHTML += `<tr class="sub-phase-row">
+                        <td></td>
+                        <td class="editable" onclick="editSubPhaseName(${phaseIdx}, ${subIdx})">${subPhase.name}</td>
+                        <td><input type="number" value="${subPhase.hoursAllowed}" onchange="updateHoursAllowed(${phaseIdx}, ${subIdx}, this.value)" style="width: 80px;"></td>`;
+                    
+                    for (let i = 0; i < Math.min(projectData.numDays, 180); i++) {
+                        bodyHTML += `<td><input type="number" min="0" max="20" value="${subPhase.resources[i]}" onchange="updateResource(${phaseIdx}, ${subIdx}, ${i}, this.value)"></td>`;
+                    }
+                    bodyHTML += `<td><button class="btn btn-small btn-secondary" onclick="deleteSubPhase(${phaseIdx}, ${subIdx})">Delete</button></td></tr>`;
+                });
+            });
+
+            bodyHTML += '<tr class="daily-total"><td colspan="3"><strong>TOTAL RESOURCES/DAY</strong></td>';
+            for (let i = 0; i < Math.min(projectData.numDays, 180); i++) {
+                const total = calculateDailyTotal(i);
+                bodyHTML += `<td style="text-align: center;"><strong>${total}</strong></td>`;
+            }
+            bodyHTML += '</tr>';
+
+            body.innerHTML = bodyHTML;
+        }
+
+        function calculateDailyTotal(day) {
+            let total = 0;
+            projectData.phases.forEach(phase => {
+                phase.subPhases.forEach(subPhase => {
+                    total += parseInt(subPhase.resources[day]) || 0;
+                });
+            });
+            return total;
+        }
+
+        function updateResource(phaseIdx, subIdx, day, value) {
+            projectData.phases[phaseIdx].subPhases[subIdx].resources[day] = parseInt(value) || 0;
+            renderTable();
+            updateGraph();
+        }
+
+        function updateHoursAllowed(phaseIdx, subIdx, value) {
+            projectData.phases[phaseIdx].subPhases[subIdx].hoursAllowed = parseInt(value) || 0;
+            renderProgressTable();
+            updateSummary();
+        }
+
+        function editSubPhaseName(phaseIdx, subIdx) {
+            const newName = prompt('Enter new sub-phase name:', projectData.phases[phaseIdx].subPhases[subIdx].name);
+            if (newName && newName.trim()) {
+                projectData.phases[phaseIdx].subPhases[subIdx].name = newName.trim();
+                renderTable();
+                renderProgressTable();
+            }
+        }
+
+        function addPhase() {
+            document.getElementById('addPhaseModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('addPhaseModal').classList.remove('active');
+            document.getElementById('newPhaseName').value = '';
+            document.getElementById('newSubPhases').value = '';
+        }
+
+        function savePhase() {
+            const phaseName = document.getElementById('newPhaseName').value.trim();
+            const subPhasesText = document.getElementById('newSubPhases').value.trim();
+            
+            if (!phaseName) {
+                alert('Please enter a phase name');
+                return;
+            }
+
+            const subPhaseNames = subPhasesText.split('\n').filter(line => line.trim());
+            const subPhases = subPhaseNames.map(name => ({
+                name: name.trim(),
+                resources: Array(180).fill(0),
+                hoursAllowed: 0,
+                hoursSpent: 0
+            }));
+
+            if (subPhases.length === 0) {
+                subPhases.push({
+                    name: 'Default Task',
+                    resources: Array(180).fill(0),
+                    hoursAllowed: 0,
+                    hoursSpent: 0
+                });
+            }
+
+            projectData.phases.push({
+                name: phaseName,
+                subPhases: subPhases
+            });
+
+            closeModal();
+            renderTable();
+            renderProgressTable();
+        }
+
+        function addSubPhase(phaseIdx) {
+            const name = prompt('Enter sub-phase name:');
+            if (name && name.trim()) {
+                projectData.phases[phaseIdx].subPhases.push({
+                    name: name.trim(),
+                    resources: Array(180).fill(0),
+                    hoursAllowed: 0,
+                    hoursSpent: 0
+                });
+                renderTable();
+                renderProgressTable();
+            }
+        }
+
+        function deletePhase(phaseIdx) {
+            if (confirm('Delete this entire phase?')) {
+                projectData.phases.splice(phaseIdx, 1);
+                renderTable();
+                renderProgressTable();
+            }
+        }
+
+        function deleteSubPhase(phaseIdx, subIdx) {
+            if (confirm('Delete this sub-phase?')) {
+                projectData.phases[phaseIdx].subPhases.splice(subIdx, 1);
+                renderTable();
+                renderProgressTable();
+            }
+        }
+
+        function updateDateHeaders() {
+            const newDate = document.getElementById('startDate').valueAsDate;
+            if (newDate) {
+                projectData.startDate = newDate;
+                renderTable();
+                updateGraph();
+            }
+        }
+
+        function renderProgressTable() {
+            const tbody = document.getElementById('progressBody');
+            let html = '';
+
+            projectData.phases.forEach((phase, phaseIdx) => {
+                phase.subPhases.forEach((subPhase, subIdx) => {
+                    const pf = subPhase.hoursSpent > 0 ? (subPhase.hoursAllowed / subPhase.hoursSpent).toFixed(2) : 'N/A';
+                    const pfClass = pf === 'N/A' ? '' : (pf >= 0.95 && pf <= 1.05) ? 'pf-good' : pf < 0.95 ? 'pf-poor' : 'pf-warning';
+                    const status = subPhase.hoursSpent === 0 ? 'Not Started' : subPhase.hoursSpent >= subPhase.hoursAllowed ? 'Complete' : 'In Progress';
+
+                    html += `<tr class="progress-row">
+                        <td>${phase.name}</td>
+                        <td>${subPhase.name}</td>
+                        <td>${subPhase.hoursAllowed}</td>
+                        <td><input type="number" value="${subPhase.hoursSpent}" onchange="updateHoursSpent(${phaseIdx}, ${subIdx}, this.value)" style="width: 100px;"></td>
+                        <td><span class="pf-indicator ${pfClass}">${pf}</span></td>
+                        <td>${status}</td>
+                    </tr>`;
+                });
+            });
+
+            tbody.innerHTML = html;
+        }
+
+        function updateHoursSpent(phaseIdx, subIdx, value) {
+            projectData.phases[phaseIdx].subPhases[subIdx].hoursSpent = parseFloat(value) || 0;
+            renderProgressTable();
+            updateSummary();
+        }
+
+        function saveProgress() {
+            alert('Progress saved successfully!');
+            updateSummary();
+        }
+
+        function updateGraph() {
+            const ctx = document.getElementById('manningChart');
+            if (!ctx) return;
+
+            const dailyTotals = [];
+            const labels = [];
+            
+            for (let i = 0; i < Math.min(projectData.numDays, 180); i++) {
+                dailyTotals.push(calculateDailyTotal(i));
+                const date = new Date(projectData.startDate);
+                date.setDate(date.getDate() + i);
+                labels.push(date.toLocaleDateString('en-NZ', { month: 'short', day: 'numeric' }));
+            }
+
+            if (manningChart) {
+                manningChart.destroy();
+            }
+
+            manningChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Resources Required',
+                        data: dailyTotals,
+                        borderColor: '#2563eb',
+                        backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Number of Resources'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Project Timeline'
+                            }
+                        }
+                    }
+                }
+            });
+
+            const nonZero = dailyTotals.filter(x => x > 0);
+            const avg = nonZero.length > 0 ? (nonZero.reduce((a, b) => a + b, 0) / nonZero.length).toFixed(1) : 0;
+            const peak = Math.max(...dailyTotals);
+            const total = dailyTotals.reduce((a, b) => a + b, 0);
+            const duration = dailyTotals.filter(x => x > 0).length;
+
+            document.getElementById('avgResources').textContent = avg;
+            document.getElementById('peakResources').textContent = peak;
+            document.getElementById('totalManDays').textContent = total;
+            document.getElementById('projectDuration').textContent = duration + ' days';
+        }
+
+        function updateSummary() {
+            let totalAllowed = 0;
+            let totalSpent = 0;
+            const phaseData = [];
+
+            projectData.phases.forEach(phase => {
+                let phaseAllowed = 0;
+                let phaseSpent = 0;
+
+                phase.subPhases.forEach(subPhase => {
+                    totalAllowed += subPhase.hoursAllowed;
+                    totalSpent += subPhase.hoursSpent;
+                    phaseAllowed += subPhase.hoursAllowed;
+                    phaseSpent += subPhase.hoursSpent;
+                });
+
+                const phasePF = phaseSpent > 0 ? (phaseAllowed / phaseSpent) : 1.0;
+                phaseData.push({
+                    name: phase.name,
+                    pf: phasePF
+                });
+            });
+
+            const overallPF = totalSpent > 0 ? (totalAllowed / totalSpent).toFixed(2) : '1.00';
+            const efficiency = totalSpent > 0 ? ((totalAllowed / totalSpent) * 100).toFixed(0) : '100';
+
+            document.getElementById('overallPF').textContent = overallPF;
+            document.getElementById('totalAllowed').textContent = totalAllowed.toLocaleString();
+            document.getElementById('totalSpent').textContent = totalSpent.toLocaleString();
+            document.getElementById('efficiency').textContent = efficiency + '%';
+
+            const ctx = document.getElementById('pfChart');
+            if (!ctx) return;
+
+            if (pfChart) {
+                pfChart.destroy();
+            }
+
+            pfChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: phaseData.map(p => p.name),
+                    datasets: [{
+                        label: 'Production Factor',
+                        data: phaseData.map(p => p.pf.toFixed(2)),
+                        backgroundColor: phaseData.map(p => {
+                            if (p.pf >= 0.95 && p.pf <= 1.05) return '#10b981';
+                            if (p.pf < 0.95) return '#ef4444';
+                            return '#f59e0b';
+                        })
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Production Factor (PF)'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            event.target.classList.add('active');
+            document.getElementById(tabName).classList.add('active');
+
+            if (tabName === 'graph') {
+                setTimeout(() => updateGraph(), 100);
+            } else if (tabName === 'summary') {
+                setTimeout(() => updateSummary(), 100);
+            }
+        }
+
+        function exportData() {
+            const dataStr = JSON.stringify(projectData, null, 2);
+            const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+            const exportFileDefaultName = 'manning-profile-masonic.json';
+            
+            const linkElement = document.createElement('a');
+            linkElement.setAttribute('href', dataUri);
+            linkElement.setAttribute('download', exportFileDefaultName);
+            linkElement.click();
+        }
+
+        function importData() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            input.onchange = e => {
+                const file = e.target.files[0];
+                const reader = new FileReader();
+                reader.onload = event => {
+                    try {
+                        const imported = JSON.parse(event.target.result);
+                        Object.assign(projectData, imported);
+                        projectData.startDate = new Date(projectData.startDate);
+                        initApp();
+                        alert('Data imported successfully!');
+                    } catch (err) {
+                        alert('Error importing file: ' + err.message);
+                    }
+                };
+                reader.readAsText(file);
+            };
+            input.click();
+        }
+
+        window.onload = initApp;
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</body>
+</html>
+
