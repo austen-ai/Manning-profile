@@ -452,84 +452,106 @@
     </div>
 
     <script>
-        const projectData = {
-            startDate: new Date(),
-            numDays: 180,
-            phases: [
-                {
-                    name: 'Foundations',
-                    subPhases: [
-                        { name: 'Site Preparation & Survey', resources: Array(180).fill(0), hoursAllowed: 320, hoursSpent: 0 },
-                        { name: 'Excavation', resources: Array(180).fill(0), hoursAllowed: 480, hoursSpent: 0 },
-                        { name: 'Formwork & Reinforcing', resources: Array(180).fill(0), hoursAllowed: 640, hoursSpent: 0 },
-                        { name: 'Concrete Pour & Finish', resources: Array(180).fill(0), hoursAllowed: 400, hoursSpent: 0 }
-                    ]
-                },
-                {
-                    name: 'Framing',
-                    subPhases: [
-                        { name: 'Floor Framing', resources: Array(180).fill(0), hoursAllowed: 960, hoursSpent: 0 },
-                        { name: 'Wall Framing', resources: Array(180).fill(0), hoursAllowed: 1280, hoursSpent: 0 },
-                        { name: 'Ceiling Framing', resources: Array(180).fill(0), hoursAllowed: 640, hoursSpent: 0 }
-                    ]
-                },
-                {
-                    name: 'Roof Structure',
-                    subPhases: [
-                        { name: 'Roof Trusses Install', resources: Array(180).fill(0), hoursAllowed: 480, hoursSpent: 0 },
-                        { name: 'Roof Bracing', resources: Array(180).fill(0), hoursAllowed: 320, hoursSpent: 0 },
-                        { name: 'Roof Cladding', resources: Array(180).fill(0), hoursAllowed: 800, hoursSpent: 0 },
-                        { name: 'Guttering & Flashings', resources: Array(180).fill(0), hoursAllowed: 400, hoursSpent: 0 }
-                    ]
-                },
-                {
-                    name: 'External Cladding',
-                    subPhases: [
-                        { name: 'Building Wrap', resources: Array(180).fill(0), hoursAllowed: 240, hoursSpent: 0 },
-                        { name: 'Cladding Installation', resources: Array(180).fill(0), hoursAllowed: 1280, hoursSpent: 0 },
-                        { name: 'Windows & Doors', resources: Array(180).fill(0), hoursAllowed: 640, hoursSpent: 0 },
-                        { name: 'External Joinery', resources: Array(180).fill(0), hoursAllowed: 480, hoursSpent: 0 }
-                    ]
-                },
-                {
-                    name: 'Services - Rough-In',
-                    subPhases: [
-                        { name: 'Electrical Rough-In', resources: Array(180).fill(0), hoursAllowed: 800, hoursSpent: 0 },
-                        { name: 'Plumbing Rough-In', resources: Array(180).fill(0), hoursAllowed: 960, hoursSpent: 0 },
-                        { name: 'HVAC Rough-In', resources: Array(180).fill(0), hoursAllowed: 640, hoursSpent: 0 },
-                        { name: 'Fire System Install', resources: Array(180).fill(0), hoursAllowed: 480, hoursSpent: 0 }
-                    ]
-                },
-                {
-                    name: 'Insulation',
-                    subPhases: [
-                        { name: 'Ceiling Insulation', resources: Array(180).fill(0), hoursAllowed: 320, hoursSpent: 0 },
-                        { name: 'Wall Insulation', resources: Array(180).fill(0), hoursAllowed: 480, hoursSpent: 0 },
-                        { name: 'Floor Insulation', resources: Array(180).fill(0), hoursAllowed: 240, hoursSpent: 0 }
-                    ]
-                },
-                {
-                    name: 'Internal Linings',
-                    subPhases: [
-                        { name: 'Plasterboard Install', resources: Array(180).fill(0), hoursAllowed: 1280, hoursSpent: 0 },
-                        { name: 'Stopping & Sanding', resources: Array(180).fill(0), hoursAllowed: 960, hoursSpent: 0 },
-                        { name: 'Painting - First Coat', resources: Array(180).fill(0), hoursAllowed: 640, hoursSpent: 0 }
-                    ]
-                },
-                {
-                    name: 'Final Fit-Off',
-                    subPhases: [
-                        { name: 'Kitchen Installation', resources: Array(180).fill(0), hoursAllowed: 640, hoursSpent: 0 },
-                        { name: 'Bathroom Fit-Off', resources: Array(180).fill(0), hoursAllowed: 800, hoursSpent: 0 },
-                        { name: 'Internal Doors & Hardware', resources: Array(180).fill(0), hoursAllowed: 480, hoursSpent: 0 },
-                        { name: 'Flooring', resources: Array(180).fill(0), hoursAllowed: 960, hoursSpent: 0 },
-                        { name: 'Electrical Fit-Off', resources: Array(180).fill(0), hoursAllowed: 480, hoursSpent: 0 },
-                        { name: 'Final Painting', resources: Array(180).fill(0), hoursAllowed: 640, hoursSpent: 0 },
-                        { name: 'Clean & Handover', resources: Array(180).fill(0), hoursAllowed: 320, hoursSpent: 0 }
-                    ]
-                }
+     const projectData = {
+    startDate: new Date(),
+    numDays: 180,
+    phases: [
+        {
+            name: 'Enabling & Siteworks',
+            subPhases: [
+                { name: 'Site Establishment & Hoarding', resources: Array(180).fill(0), hoursAllowed: 160, hoursSpent: 0 },
+                { name: 'Bulk Earthworks & Leveling', resources: Array(180).fill(0), hoursAllowed: 320, hoursSpent: 0 },
+                { name: 'Services Trenches & Underground Drainage', resources: Array(180).fill(0), hoursAllowed: 280, hoursSpent: 0 },
+                { name: 'Subgrade Prep & Hardfill', resources: Array(180).fill(0), hoursAllowed: 240, hoursSpent: 0 }
             ]
-        };
+        },
+        {
+            name: 'Foundations & Slab',
+            subPhases: [
+                { name: 'Set‑out & Footings', resources: Array(180).fill(0), hoursAllowed: 260, hoursSpent: 0 },
+                { name: 'Pile / Pad Foundations (if required)', resources: Array(180).fill(0), hoursAllowed: 220, hoursSpent: 0 },
+                { name: 'Underslab Plumbing / Electrical Conduits', resources: Array(180).fill(0), hoursAllowed: 260, hoursSpent: 0 },
+                { name: 'Reo, Vapour Barrier & Slab Pour', resources: Array(180).fill(0), hoursAllowed: 360, hoursSpent: 0 },
+                { name: 'Slab Curing, Saw‑cuts & Seal', resources: Array(180).fill(0), hoursAllowed: 160, hoursSpent: 0 }
+            ]
+        },
+        {
+            name: 'Superstructure & Roof',
+            subPhases: [
+                { name: 'Primary Steel Frame Erection', resources: Array(180).fill(0), hoursAllowed: 480, hoursSpent: 0 },
+                { name: 'Secondary Framing / Lintels', resources: Array(180).fill(0), hoursAllowed: 280, hoursSpent: 0 },
+                { name: 'Roof Framing & Purlins', resources: Array(180).fill(0), hoursAllowed: 260, hoursSpent: 0 },
+                { name: 'Roof Cladding & Membranes', resources: Array(180).fill(0), hoursAllowed: 360, hoursSpent: 0 },
+                { name: 'Roof Drainage, Gutters & Downpipes', resources: Array(180).fill(0), hoursAllowed: 180, hoursSpent: 0 }
+            ]
+        },
+        {
+            name: 'External Envelope & Façade',
+            subPhases: [
+                { name: 'External Wall Framing / Blockwork', resources: Array(180).fill(0), hoursAllowed: 360, hoursSpent: 0 },
+                { name: 'Rainscreen / Cladding Panels', resources: Array(180).fill(0), hoursAllowed: 420, hoursSpent: 0 },
+                { name: 'Aluminium Joinery & Shopfront Glazing', resources: Array(180).fill(0), hoursAllowed: 280, hoursSpent: 0 },
+                { name: 'Signage Steelwork & Fascia Frames', resources: Array(180).fill(0), hoursAllowed: 200, hoursSpent: 0 },
+                { name: 'Exterior Painting & Brand Elements', resources: Array(180).fill(0), hoursAllowed: 260, hoursSpent: 0 }
+            ]
+        },
+        {
+            name: 'Services – Rough‑In',
+            subPhases: [
+                { name: 'Electrical Main Feed & DBs', resources: Array(180).fill(0), hoursAllowed: 260, hoursSpent: 0 },
+                { name: 'Lighting & Power Rough‑In', resources: Array(180).fill(0), hoursAllowed: 420, hoursSpent: 0 },
+                { name: 'Hydraulic / Plumbing Rough‑In', resources: Array(180).fill(0), hoursAllowed: 420, hoursSpent: 0 },
+                { name: 'Mechanical / HVAC Ducts & Units', resources: Array(180).fill(0), hoursAllowed: 420, hoursSpent: 0 },
+                { name: 'Fire Protection & Detection Rough‑In', resources: Array(180).fill(0), hoursAllowed: 260, hoursSpent: 0 },
+                { name: 'Comms / Data / Security Pre‑wire', resources: Array(180).fill(0), hoursAllowed: 220, hoursSpent: 0 }
+            ]
+        },
+        {
+            name: 'Kitchen & BOH Build‑Out',
+            subPhases: [
+                { name: 'Kitchen Walls, Linings & Hygienic Finishes', resources: Array(180).fill(0), hoursAllowed: 360, hoursSpent: 0 },
+                { name: 'Grease Ducts & Extraction Hoods', resources: Array(180).fill(0), hoursAllowed: 260, hoursSpent: 0 },
+                { name: 'Coldroom / Freezer Install & Panels', resources: Array(180).fill(0), hoursAllowed: 260, hoursSpent: 0 },
+                { name: 'KFC Proprietary Equipment Set‑out', resources: Array(180).fill(0), hoursAllowed: 420, hoursSpent: 0 },
+                { name: 'Stainless Benches & Joinery', resources: Array(180).fill(0), hoursAllowed: 260, hoursSpent: 0 },
+                { name: 'Final Kitchen Services Hook‑up', resources: Array(180).fill(0), hoursAllowed: 320, hoursSpent: 0 }
+            ]
+        },
+        {
+            name: 'Front of House & Dining',
+            subPhases: [
+                { name: 'Internal Partitions & Linings (FOH)', resources: Array(180).fill(0), hoursAllowed: 360, hoursSpent: 0 },
+                { name: 'Tiling / Vinyl Flooring & Coving', resources: Array(180).fill(0), hoursAllowed: 360, hoursSpent: 0 },
+                { name: 'Ceilings, Grid & Feature Bulkheads', resources: Array(180).fill(0), hoursAllowed: 320, hoursSpent: 0 },
+                { name: 'Feature Walls, Graphics & Paneling', resources: Array(180).fill(0), hoursAllowed: 260, hoursSpent: 0 },
+                { name: 'Counters, POS Joinery & Screens', resources: Array(180).fill(0), hoursAllowed: 320, hoursSpent: 0 },
+                { name: 'FOH Painting & Wall Finishes', resources: Array(180).fill(0), hoursAllowed: 260, hoursSpent: 0 }
+            ]
+        },
+        {
+            name: 'External Works & Drive‑Through',
+            subPhases: [
+                { name: 'Carpark Bulk Earthworks & Sub‑base', resources: Array(180).fill(0), hoursAllowed: 260, hoursSpent: 0 },
+                { name: 'Concrete Pavements & Kerbs', resources: Array(180).fill(0), hoursAllowed: 320, hoursSpent: 0 },
+                { name: 'Drive‑Through Lane & Canopy', resources: Array(180).fill(0), hoursAllowed: 320, hoursSpent: 0 },
+                { name: 'Menu Boards, Speaker Posts & Bollards', resources: Array(180).fill(0), hoursAllowed: 200, hoursSpent: 0 },
+                { name: 'External Lighting & Signage Install', resources: Array(180).fill(0), hoursAllowed: 220, hoursSpent: 0 },
+                { name: 'Landscaping & Line Marking', resources: Array(180).fill(0), hoursAllowed: 220, hoursSpent: 0 }
+            ]
+        },
+        {
+            name: 'Testing, Commissioning & Handover',
+            subPhases: [
+                { name: 'Services Testing & Pre‑commission', resources: Array(180).fill(0), hoursAllowed: 260, hoursSpent: 0 },
+                { name: 'Fire, BWoF & Compliance Sign‑off', resources: Array(180).fill(0), hoursAllowed: 200, hoursSpent: 0 },
+                { name: 'Kitchen Performance / Load Testing', resources: Array(180).fill(0), hoursAllowed: 220, hoursSpent: 0 },
+                { name: 'Final Cleaning & Defects Pass', resources: Array(180).fill(0), hoursAllowed: 260, hoursSpent: 0 },
+                { name: 'Client Training / Soft Opening Support', resources: Array(180).fill(0), hoursAllowed: 200, hoursSpent: 0 }
+            ]
+        }
+    ]
+};
+
 
         let manningChart = null;
         let pfChart = null;
